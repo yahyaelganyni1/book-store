@@ -4,19 +4,22 @@ import Book from './Book';
 import AddBook from './AddBook';
 
 function Books() {
-  const books = useSelector((state) => state.reducer);
+  const books = useSelector((state) => state.booksReducer);
   return (
-    <ul>
-      {books.map((book) => (
-        <Book
-          category="action"
-          bookName={book.title}
-          Author={book.Author}
-          key="11"
-        />
-      ))}
+    <div>
+      <ul>
+        {books.map((book) => (
+          <Book
+            category="Action"
+            title={book.title}
+            author={book.author}
+            key={book.id}
+            id={book.id}
+          />
+        ))}
+      </ul>
       <AddBook />
-    </ul>
+    </div>
   );
 }
 

@@ -1,21 +1,29 @@
 import React from 'react';
-import { PropTypes } from 'prop-types';
-// import { useDispatch } from 'react-redux';
+import propTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Link } from 'react-router-dom';
+import { removeBook } from '../redux/books/books';
 
-function Book({ category, bookName, Author }) {
-  // const dispatch = useDispatch();
+function Book({
+  category,
+  title,
+  author,
+  id,
+}) {
+  const dispatch = useDispatch();
   return (
-    <li key="11">
+    <li>
       <span>{category}</span>
-      <h3>{bookName}</h3>
-      <span>{Author}</span>
+      <h3>{title}</h3>
+      <h4>{author}</h4>
       <ul>
         <li>
           <Link to="/">Comment</Link>
         </li>
         <li>
-          <Link to="/">Remove</Link>
+          <button type="button" onClick={() => dispatch(removeBook(id))}>
+            Remove
+          </button>
         </li>
         <li>
           <Link to="/">Edit</Link>
@@ -25,18 +33,11 @@ function Book({ category, bookName, Author }) {
   );
 }
 
-export default Book;
-
 Book.propTypes = {
-  category: PropTypes.string,
-  bookName: PropTypes.string,
-  Author: PropTypes.string,
-  // key: PropTypes.string,
+  category: propTypes.string.isRequired,
+  title: propTypes.string.isRequired,
+  author: propTypes.string.isRequired,
+  id: propTypes.string.isRequired,
 };
 
-Book.defaultProps = {
-  category: PropTypes.string,
-  bookName: PropTypes.string,
-  Author: PropTypes.string,
-  // key: PropTypes.string,
-};
+export default Book;
